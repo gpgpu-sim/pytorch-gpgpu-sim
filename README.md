@@ -1,4 +1,4 @@
-![PyTorch Logo](https://github.com/pytorch/pytorch/blob/master/docs/source/_static/img/pytorch-logo-dark.png)
+![PyTorch Logo](docs/source/_static/img/pytorch-logo-dark.png)
 
 --------------------------------------------------------------------------------
 
@@ -9,9 +9,9 @@ Welcome to PyTorch for GPGPU-Sim!
 
 This repo is based on the popular PyTorch framework, release v0.4.1, the latest release as of Aug 17, 2018. It can be found at https://github.com/pytorch/pytorch
 
-- [Installation](#installation)
-- [GPGPU-Sim](#gpgpusim)
-- [Getting Started](#getting-started)
+- [Installation](#markdown-header-installation)
+- [GPGPU-Sim](#markdown-header-gpgpu-sim)
+- [Getting Started](#markdown-header-getting-started)
 
 
 ## Installation
