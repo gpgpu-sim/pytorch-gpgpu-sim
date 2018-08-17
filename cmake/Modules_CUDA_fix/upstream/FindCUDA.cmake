@@ -856,13 +856,7 @@ if(NOT CUDA_VERSION VERSION_LESS "5.5")
 endif()
 
 
-if(CUDA_cudart_static_LIBRARY)
-  # If static cudart available, use it by default, but provide a user-visible option to disable it.
-  option(CUDA_USE_STATIC_CUDA_RUNTIME "Use the static version of the CUDA runtime library if available" ON)
-else()
-  # If not available, silently disable the option.
-  set(CUDA_USE_STATIC_CUDA_RUNTIME OFF CACHE INTERNAL "")
-endif()
+option(CUDA_USE_STATIC_CUDA_RUNTIME "Use the static version of the CUDA runtime library if available" OFF)
 
 if(CUDA_USE_STATIC_CUDA_RUNTIME)
   set(CUDA_CUDART_LIBRARY_VAR CUDA_cudart_static_LIBRARY)

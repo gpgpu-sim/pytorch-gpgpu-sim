@@ -152,7 +152,7 @@ IS_LINUX = (platform.system() == 'Linux')
 FULL_CAFFE2 = check_env_flag('FULL_CAFFE2')
 BUILD_PYTORCH = check_env_flag('BUILD_PYTORCH')
 
-USE_CUDA_STATIC_LINK = check_env_flag('USE_CUDA_STATIC_LINK')
+USE_CUDA_STATIC_LINK = False
 
 NUM_JOBS = multiprocessing.cpu_count()
 max_jobs = os.getenv("MAX_JOBS")
@@ -544,6 +544,7 @@ class build_ext(build_ext_parent):
         # setuptools. Only the contents of this folder are installed in the
         # "install" command by default.
         if FULL_CAFFE2:
+            sys.exit()
             # We only make this copy for Caffe2's pybind extensions
             caffe2_pybind_exts = [
                 'caffe2.python.caffe2_pybind11_state',
@@ -887,7 +888,6 @@ if USE_CUDA:
             cuda_lib_path = os.path.join(CUDA_HOME, lib_dir)
             if os.path.exists(cuda_lib_path):
                 break
-        extra_link_args.append('-Wl,-rpath,' + cuda_lib_path)
 
         nvtoolext_lib_name = 'nvToolsExt'
 
@@ -952,8 +952,6 @@ if USE_CUDNN:
     main_libraries += [CUDNN_LIBRARY]
     # NOTE: these are at the front, in case there's another cuDNN in CUDA path
     include_dirs.insert(0, CUDNN_INCLUDE_DIR)
-    if not IS_WINDOWS:
-        extra_link_args.insert(0, '-Wl,-rpath,' + CUDNN_LIB_DIR)
     extra_compile_args += ['-DUSE_CUDNN']
 
 if DEBUG:
@@ -1009,7 +1007,7 @@ if USE_CUDA:
     if IS_WINDOWS:
         thnvrtc_link_flags += ['cuda.lib', 'nvrtc.lib']
     else:
-        thnvrtc_link_flags += ['-lcuda', '-lnvrtc']
+        thnvrtc_link_flags += ['-lcudart', '-lcuda', '-lnvrtc']
     cuda_stub_path = [cuda_lib_path + '/stubs']
     if IS_DARWIN:
         # on macOS this is where the CUDA stub is installed according to the manual
