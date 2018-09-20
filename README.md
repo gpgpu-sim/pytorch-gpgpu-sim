@@ -26,8 +26,8 @@ If you want to build on Windows, Visual Studio 2017 and NVTX are also needed.
 
 ### Get the PyTorch source
 ```bash
-git clone --recursive https://github.com/pytorch/pytorch
-cd pytorch
+git clone --recursive [this repo]
+cd pytorch-gpgpusim-install
 ```
 
 ### Install PyTorch
